@@ -1,11 +1,13 @@
 package cancheta.cmput301.listycity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ListView cityList;
     ArrayList<String> cities = new ArrayList<>();
     CitiesAdapter citiesAdapter;
+    Button addCityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +33,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cityList = findViewById(R.id.city_list);
+        addCityButton = findViewById(R.id.add_city);
         citiesAdapter = new CitiesAdapter(this, cities);
         cities.addAll(Arrays.asList(defaultCities));
         cityList.setAdapter(citiesAdapter);
+
+        addCityButton.setOnClickListener(v-> {
+            Intent intent = new Intent(MainActivity.this, AddCityActivity.class);
+            startActivity(intent);
+        });
     }
 
     private class CitiesAdapter extends ArrayAdapter<String> {
