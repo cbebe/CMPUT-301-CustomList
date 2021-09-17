@@ -22,7 +22,8 @@ public class AddCityActivity extends AppCompatActivity {
         addCityButton = findViewById(R.id.add_city);
         cityField = findViewById(R.id.city_name);
         addCityButton.setOnClickListener(v -> {
-            String city = cityField.getText().toString();
+            String city = cityField.getText().toString().trim();
+            if (city.isEmpty()) return;
             CityList.getInstance().add(city);
             finish();
         });

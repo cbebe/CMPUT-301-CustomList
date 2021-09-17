@@ -10,9 +10,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * CitiesAdapter
+ * ArrayAdapter class for city_list_view layout
+ */
 public class CitiesAdapter extends ArrayAdapter<String> {
-    private static final int COLOUR_WHITE = Color.parseColor("#FFFFFF");
-    private static final int COLOUR_GREY = Color.parseColor("#CCCCCC");
+    /**
+     * Colour constants for TextView background
+     **/
+    private static final int BG_COLOUR_DESELECTED = Color.parseColor("#FFFFFF");
+    private static final int BG_COLOUR_SELECTED = Color.parseColor("#CCCCCC");
 
     public CitiesAdapter(Context context, ArrayList<String> cities) {
         super(context, R.layout.city_list_view, cities);
@@ -26,16 +33,12 @@ public class CitiesAdapter extends ArrayAdapter<String> {
 
             TextView cityName = convertView.findViewById(R.id.textView);
             cityName.setText(data);
-            cityName.setBackgroundColor(CityList.isSelected(data) ? COLOUR_GREY : COLOUR_WHITE);
+            cityName.setBackgroundColor(CityList.isSelected(data) ? BG_COLOUR_SELECTED : BG_COLOUR_DESELECTED);
 
             convertView.setOnClickListener(v -> {
-                if (CityList.isSelected(data)) {
-                    cityName.setBackgroundColor(COLOUR_WHITE);
-                    CityList.removeSelected(data);
-                    return;
-                }
-                cityName.setBackgroundColor(COLOUR_GREY);
-                CityList.addSelected(data);
+                // invert colour
+                cityName.setBackgroundColor(CityList.isSelected(data) ? BG_COLOUR_DESELECTED : BG_COLOUR_SELECTED);
+                CityList.toggleSelected(data);
             });
         }
 
