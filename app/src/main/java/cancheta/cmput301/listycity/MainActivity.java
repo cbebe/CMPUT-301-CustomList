@@ -14,16 +14,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String[] defaultCities = {
-            "Edmonton", "Vancouver", "Calgary", "Moscow",
-            "Berlin", "Vienna", "Tokyo"
-    };
     ListView cityList;
-    ArrayList<String> cities = new ArrayList<>();
     CitiesAdapter citiesAdapter;
     Button addCityButton;
 
@@ -31,16 +25,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (citiesAdapter == null) {
+            citiesAdapter = new CitiesAdapter(this, CityList.getInstance());
+        }
         cityList = findViewById(R.id.city_list);
-        addCityButton = findViewById(R.id.add_city);
-        citiesAdapter = new CitiesAdapter(this, cities);
-        cities.addAll(Arrays.asList(defaultCities));
         cityList.setAdapter(citiesAdapter);
 
-        addCityButton.setOnClickListener(v-> {
+        addCityButton = findViewById(R.id.add_city);
+        addCityButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddCityActivity.class);
             startActivity(intent);
+            citiesAdapter.notifyDataSetChanged();
         });
     }
 
@@ -51,25 +51,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            String data = cities.get(position);
-            ViewHolder viewHolder;
             if (convertView == null) {
-                viewHolder = new ViewHolder();
+                String data = CityList.getInstance().get(position);
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.city_list_view, parent, false);
 
-                viewHolder.text = convertView.findViewById(R.id.textView);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
+                TextView cityName = convertView.findViewById(R.id.textView);
+                cityName.setText(data);
             }
-
-            viewHolder.text.setText(data);
 
             return convertView;
         }
 
-        private class ViewHolder {
-            TextView text;
-        }
+//        private class ViewHolder {
+//            TextView text;
+//        }
 
     }
 }
