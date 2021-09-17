@@ -19,7 +19,7 @@ public class AddCityActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        addCityButton = (Button) findViewById(R.id.add_city);
+        addCityButton = findViewById(R.id.add_city);
         cityField = findViewById(R.id.city_name);
         addCityButton.setOnClickListener(v -> {
             String city = cityField.getText().toString();

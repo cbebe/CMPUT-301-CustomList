@@ -26,22 +26,16 @@ public class CitiesAdapter extends ArrayAdapter<String> {
 
             TextView cityName = convertView.findViewById(R.id.textView);
             cityName.setText(data);
-            cityName.setBackgroundColor(COLOUR_WHITE);
+            cityName.setBackgroundColor(CityList.isSelected(data) ? COLOUR_GREY : COLOUR_WHITE);
 
             convertView.setOnClickListener(v -> {
-                int oldPosition = CityList.getSelected();
-                // deselect option
-                if (oldPosition == position) {
+                if (CityList.isSelected(data)) {
                     cityName.setBackgroundColor(COLOUR_WHITE);
-                    CityList.setSelected(CityList.NO_SELECTED);
+                    CityList.removeSelected(data);
                     return;
                 }
-                if (oldPosition != CityList.NO_SELECTED) {
-                    View oldSelected = parent.getChildAt(oldPosition);
-                    oldSelected.setBackgroundColor(COLOUR_WHITE);
-                }
                 cityName.setBackgroundColor(COLOUR_GREY);
-                CityList.setSelected(position);
+                CityList.addSelected(data);
             });
         }
 

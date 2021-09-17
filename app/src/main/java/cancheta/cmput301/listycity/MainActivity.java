@@ -3,9 +3,9 @@ package cancheta.cmput301.listycity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 cityList.setAdapter(citiesAdapter);
             }
         });
+
+        cityList.setOnItemClickListener((adapterView, view, i, l) -> cityList.setAdapter(citiesAdapter));
 
     }
 }

@@ -2,15 +2,14 @@ package cancheta.cmput301.listycity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class CityList extends ArrayList<String> {
     private static final String[] defaultCities = {
             "Edmonton", "Vancouver", "Calgary", "Moscow",
             "Berlin", "Vienna", "Tokyo"
     };
-    public static final int NO_SELECTED = -1;
-
-    private static int selected;
+    private static HashSet<String> selected =  new HashSet<>();
     private static CityList instance;
 
     private CityList() {
@@ -18,12 +17,13 @@ public class CityList extends ArrayList<String> {
     }
 
     public static boolean deleteSelected() {
-        if (selected == NO_SELECTED) {
+        if (selected.size() == 0) {
             return false;
         }
-        String value = instance.get(selected);
-        instance.remove(value);
-        selected = NO_SELECTED;
+        for (String s : selected) {
+            instance.remove(s);
+        }
+        selected.clear();
         return true;
     }
 
@@ -35,11 +35,16 @@ public class CityList extends ArrayList<String> {
         return instance;
     }
 
-    public static int getSelected() {
-        return selected;
+    public static void addSelected(String city) {
+        selected.add(city);
     }
 
-    public static void setSelected(int selected) {
-        CityList.selected = selected;
+    public static void removeSelected(String city) {
+        selected.remove(city);
     }
+
+    public static boolean isSelected(String city) {
+        return selected.contains(city);
+    }
+
 }
