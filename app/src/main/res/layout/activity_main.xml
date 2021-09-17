@@ -7,11 +7,27 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/add_city"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        style="?android:buttonBarStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_city" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_city"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_city" />
+
+        <Button
+            android:id="@+id/delete_city"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_city" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/city_list"
