@@ -7,8 +7,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddCityActivity extends AppCompatActivity {
-    Button addCityButton;
-    EditText cityField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +17,16 @@ public class AddCityActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        addCityButton = findViewById(R.id.add_city);
-        cityField = findViewById(R.id.city_name);
+        Button addCityButton = findViewById(R.id.add_city);
+        EditText cityField = findViewById(R.id.city_name);
+        EditText provinceField = findViewById(R.id.province_name);
         addCityButton.setOnClickListener(v -> {
             String city = cityField.getText().toString().trim();
+            String province = provinceField.getText().toString().trim();
+
             if (city.isEmpty()) return;
-            CityList.getInstance().add(city);
+            if (province.isEmpty()) return;
+            CityList.getInstance().add(new City(city, province));
             finish();
         });
     }

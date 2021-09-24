@@ -17,6 +17,16 @@
         android:layout_marginBottom="12dp"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:hint="@string/province"
+        android:autofillHints="postalAddress"
+        android:inputType="text"
+        android:id="@+id/province_name"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="12dp"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/add_city"
         android:text="@string/add_city"

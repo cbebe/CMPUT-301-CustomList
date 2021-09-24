@@ -14,25 +14,25 @@ import java.util.ArrayList;
  * CitiesAdapter
  * ArrayAdapter class for city_list_view layout
  */
-public class CitiesAdapter extends ArrayAdapter<String> {
+public class CitiesAdapter extends ArrayAdapter<City> {
     /**
      * Colour constants for TextView background
      **/
     private static final int BG_COLOUR_DESELECTED = Color.parseColor("#FFFFFF");
     private static final int BG_COLOUR_SELECTED = Color.parseColor("#CCCCCC");
 
-    public CitiesAdapter(Context context, ArrayList<String> cities) {
+    public CitiesAdapter(Context context, ArrayList<City> cities) {
         super(context, R.layout.city_list_view, cities);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            String data = CityList.getInstance().get(position);
+            City data = CityList.getInstance().get(position);
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.city_list_view, parent, false);
 
             TextView cityName = convertView.findViewById(R.id.textView);
-            cityName.setText(data);
+            cityName.setText(data.toString());
             cityName.setBackgroundColor(CityList.isSelected(data) ? BG_COLOUR_SELECTED : BG_COLOUR_DESELECTED);
 
             convertView.setOnClickListener(v -> {
