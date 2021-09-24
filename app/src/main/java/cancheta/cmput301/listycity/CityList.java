@@ -1,7 +1,6 @@
 package cancheta.cmput301.listycity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -9,16 +8,10 @@ import java.util.HashSet;
  */
 public class CityList extends ArrayList<City> {
     /** Initial data for CityList **/
-    private static final String[][] defaultCities = {
-            {"Edmonton", "AB"},
-            {"Toronto", "ON"},
-            {"Hamilton", "ON"},
-            {"Denver", "CO"},
-            {"Los Angeles", "CA"},
-            {"Vancouver", "BC"},
-    };
+    private static final String[][] defaultCities = { { "Edmonton", "AB" }, { "Toronto", "ON" }, { "Hamilton", "ON" },
+            { "Denver", "CO" }, { "Los Angeles", "CA" }, { "Vancouver", "BC" }, };
     /** Static Set containing cities selected for deletion **/
-    private static final HashSet<City> selected =  new HashSet<>();
+    private static final HashSet<City> selected = new HashSet<>();
     /** Singleton instance of CityList **/
     private static CityList instance;
 
@@ -31,10 +24,12 @@ public class CityList extends ArrayList<City> {
 
     /**
      * Deletes selected cities from the list
+     * 
      * @return true if any city was deleted
      */
     public static boolean deleteSelected() {
-        if (selected.size() == 0) return false;
+        if (selected.size() == 0)
+            return false;
 
         for (City c : selected) {
             instance.remove(c);
@@ -47,6 +42,7 @@ public class CityList extends ArrayList<City> {
 
     /**
      * Gets CityList singleton instance
+     * 
      * @return the CityList instance
      */
     public static CityList getInstance() {
@@ -61,6 +57,7 @@ public class CityList extends ArrayList<City> {
 
     /**
      * Toggles selection of a city from the selected set
+     * 
      * @param city city to toggle selection
      */
     public static void toggleSelected(City city) {
@@ -73,6 +70,7 @@ public class CityList extends ArrayList<City> {
 
     /**
      * Checks if the given city is in the selected set
+     * 
      * @param city String to check existence in the set
      * @return true if the city is in selected
      */

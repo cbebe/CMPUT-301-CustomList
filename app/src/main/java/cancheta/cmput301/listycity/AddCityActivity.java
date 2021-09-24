@@ -24,8 +24,10 @@ public class AddCityActivity extends AppCompatActivity {
             String city = cityField.getText().toString().trim();
             String province = provinceField.getText().toString().trim();
 
-            if (city.isEmpty()) return;
-            if (province.isEmpty()) return;
+            if (city.isEmpty())
+                return;
+            if (province.isEmpty())
+                return;
             CityList.getInstance().add(new City(city, province));
             finish();
         });
