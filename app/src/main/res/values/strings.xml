@@ -7,4 +7,6 @@
     <string name="add_city_uc">ADD CITY</string>
     <string name="city_name">City name</string>
     <string name="city_province">City Province</string>
+    <string name="edit_city">Edit City</string>
+    <string name="edit_city_uc">EDIT_CITY</string>
 </resources>
