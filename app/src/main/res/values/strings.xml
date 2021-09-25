@@ -4,4 +4,7 @@
     <string name="city">City</string>
     <string name="province">Province/State</string>
     <string name="delete_city">Delete City</string>
+    <string name="add_city_uc">ADD CITY</string>
+    <string name="city_name">City name</string>
+    <string name="city_province">City Province</string>
 </resources>
