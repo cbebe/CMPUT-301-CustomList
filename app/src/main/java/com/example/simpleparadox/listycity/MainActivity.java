@@ -60,14 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 collectionReference
                         .document(cityName)
                         .set(data)
-                        .addOnSuccessListener(aVoid -> {
-                            // These are a method which gets executed when the task is succeeded
-                            Log.d(TAG, "Data has been added successfully!");
-                        })
-                        .addOnFailureListener(e -> {
-                            // These are a method which gets executed if there’s any problem
-                            Log.d(TAG, "Data could not be added!" + e.toString());
-                        });
+                        // These are a method which gets executed when the task is succeeded
+                        .addOnSuccessListener(aVoid -> Log.d(TAG, "Data has been added successfully!"))
+                        // These are a method which gets executed if there’s any problem
+                        .addOnFailureListener(e -> Log.d(TAG, "Data could not be added!" + e.toString()));
                 addCityEditText.setText("");
                 addProvinceEditText.setText("");
 
@@ -79,7 +75,12 @@ public class MainActivity extends AppCompatActivity {
             if (cityName.length() > 0) {
                 for (City city : cityDataList) {
                     if (city.getCityName().equals(cityName)) {
-                        db.collection(CITIES_COLLECTION).document(cityName).delete().addOnSuccessListener(l -> Log.d(TAG, "DocumentSnapshot successfully deleted!")).addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
+                        db.collection(CITIES_COLLECTION).document(cityName).delete()
+                                // These are a method which gets executed when the task is succeeded
+                                .addOnSuccessListener(l -> Log.d(TAG, "DocumentSnapshot successfully deleted!"))
+                                // These are a method which gets executed if there’s any problem
+                                .addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
+                        deleteCityEditText.setText("");
                         break;
                     }
                 }
