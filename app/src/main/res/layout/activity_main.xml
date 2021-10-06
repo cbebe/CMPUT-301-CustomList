@@ -24,7 +24,22 @@
             android:id="@+id/add_city_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add City"/>
+            android:text="@string/add_city"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/delete_city_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"/>
+        <Button
+            android:id="@+id/delete_city_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_city"/>
     </LinearLayout>
     <ListView
         android:id="@+id/city_list"

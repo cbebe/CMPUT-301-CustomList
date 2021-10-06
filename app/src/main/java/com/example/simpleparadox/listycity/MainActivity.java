@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    final String TAG = "Sample";
+    private final String TAG = "Sample";
+    private final String CITIES_COLLECTION = "Cities";
+    private final String PROVINCE_NAME = "Province Name";
     FirebaseFirestore db;
     private ArrayAdapter<City> cityAdapter;
     private ArrayList<City> cityDataList;
     private EditText addCityEditText;
     private EditText addProvinceEditText;
+    private EditText deleteCityEditText;
 
 
     @Override
@@ -36,13 +39,16 @@ public class MainActivity extends AppCompatActivity {
         addCityEditText = findViewById(R.id.add_city_field);
         addProvinceEditText = findViewById(R.id.add_province_edit_text);
 
+        final Button deleteCityButton = findViewById(R.id.delete_city_button);
+        deleteCityEditText = findViewById(R.id.delete_city_field);
+
 
         cityDataList = new ArrayList<>();
         cityAdapter = new CustomList(this, cityDataList);
         cityList.setAdapter(cityAdapter);
 
         db = FirebaseFirestore.getInstance();
-        final CollectionReference collectionReference = db.collection("Cities");
+        final CollectionReference collectionReference = db.collection(CITIES_COLLECTION);
 
         addCityButton.setOnClickListener(view -> {
             final String cityName = addCityEditText.getText().toString();
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             HashMap<String, String> data = new HashMap<>();
 
             if (cityName.length() > 0 && provinceName.length() > 0) {
-                data.put("Province Name", provinceName);
+                data.put(PROVINCE_NAME, provinceName);
                 collectionReference
                         .document(cityName)
                         .set(data)
@@ -68,14 +74,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        deleteCityButton.setOnClickListener(view -> {
+            final String cityName = deleteCityEditText.getText().toString();
+            if (cityName.length() > 0) {
+                for (City city : cityDataList) {
+                    if (city.getCityName().equals(cityName)) {
+                        db.collection(CITIES_COLLECTION).document(cityName).delete().addOnSuccessListener(l -> Log.d(TAG, "DocumentSnapshot successfully deleted!")).addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
+                        break;
+                    }
+                }
+
+            }
+        });
+
         collectionReference.addSnapshotListener((queryDocumentSnapshots, error) -> {
             cityDataList.clear();
             assert queryDocumentSnapshots != null;
-            for(QueryDocumentSnapshot doc: queryDocumentSnapshots)
-            {
-                Log.d(TAG, String.valueOf(doc.getData().get("Province Name")));
+            for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                Log.d(TAG, String.valueOf(doc.getData().get(PROVINCE_NAME)));
                 String city = doc.getId();
-                String province = (String) doc.getData().get("Province Name");
+                String province = (String) doc.getData().get(PROVINCE_NAME);
                 cityDataList.add(new City(city, province)); // Adding the cities and provinces from FireStore
             }
             cityAdapter.notifyDataSetChanged(); // Notifying the adapter to render any new data fetched from the cloud
