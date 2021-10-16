@@ -49,4 +49,32 @@ class CityListTest {
         cityList.add(city);
         assertTrue(cityList.hasCity(city));
     }
+
+    @Test
+    void testDelete() {
+        CityList cityList = mockCityList();
+        assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
+        City city = new City("Charlottetown", "Prince Edward Island");
+        cityList.add(city);
+        assertDoesNotThrow(()->cityList.delete(city));
+        assertFalse(cityList.hasCity(city));
+    }
+
+    @Test
+    void testDeleteException() {
+        CityList cityList = mockCityList();
+        assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
+        City city = new City("Charlottetown", "Prince Edward Island");
+        assertThrows(IllegalArgumentException.class,()->cityList.delete(city));
+    }
+
+    @Test
+    void testCountCities(){
+        CityList cityList = mockCityList();
+        assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
+        assertEquals(1, cityList.countCities());
+        City city = new City("Charlottetown", "Prince Edward Island");
+        cityList.add(city);
+        assertEquals(2, cityList.countCities());
+    }
 }
