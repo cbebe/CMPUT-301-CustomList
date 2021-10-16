@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * This is a class that keeps track of a list of City objects
+ *
+ * @author Charles Ancheta
+ * @version 1.0
+ * @see City
  */
 public class CityList {
     private final List<City> cities = new ArrayList<>();
@@ -61,6 +65,7 @@ public class CityList {
 
     /**
      * Counts the number of cities in the list
+     *
      * @return How many cities are in the list
      */
     public int countCities() {
