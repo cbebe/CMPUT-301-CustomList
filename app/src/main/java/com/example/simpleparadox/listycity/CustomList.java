@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomList extends ArrayAdapter<City> {
 
-    private final ArrayList<City> cities;
+    private final List<City> cities;
     private final Context context;
 
-    public CustomList(Context context, ArrayList<City> cities) {
+    public CustomList(Context context, List<City> cities) {
         super(context, 0, cities);
         this.cities = cities;
         this.context = context;
