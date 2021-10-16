@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         // Declare the variables so that you will be able to reference it later.
         final ListView cityListView = findViewById(R.id.city_list);
 
-        final String []cities ={"Edmonton", "Vancouver", "Toronto", "Hamilton", "Denver", "Los Angeles"};
-        final String []provinces = {"AB", "BC", "ON", "ON", "CO", "CA"};
+        final String[] cities = {"Edmonton", "Vancouver", "Toronto", "Hamilton", "Denver", "Los Angeles"};
+        final String[] provinces = {"AB", "BC", "ON", "ON", "CO", "CA"};
 
         final CityList cityDataList = new CityList();
-        for (int i=0; i < cities.length; ++i) {
+        for (int i = 0; i < cities.length; ++i) {
             cityDataList.add(new City(cities[i], provinces[i]));
         }
         ArrayAdapter<City> cityAdapter = new CustomList(this, cityDataList.getCities());

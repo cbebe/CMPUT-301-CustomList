@@ -1,6 +1,7 @@
 package com.example.simpleparadox.listycity;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CityListTest {
@@ -9,6 +10,7 @@ class CityListTest {
         cityList.add(mockCity());
         return cityList;
     }
+
     private City mockCity() {
         return new City("Edmonton", "Alberta");
     }
@@ -42,7 +44,7 @@ class CityListTest {
     }
 
     @Test
-    void testHasCity(){
+    void testHasCity() {
         CityList cityList = mockCityList();
         assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
         City city = new City("Charlottetown", "Prince Edward Island");
@@ -56,7 +58,7 @@ class CityListTest {
         assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
         City city = new City("Charlottetown", "Prince Edward Island");
         cityList.add(city);
-        assertDoesNotThrow(()->cityList.delete(city));
+        assertDoesNotThrow(() -> cityList.delete(city));
         assertFalse(cityList.hasCity(city));
     }
 
@@ -65,11 +67,11 @@ class CityListTest {
         CityList cityList = mockCityList();
         assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
         City city = new City("Charlottetown", "Prince Edward Island");
-        assertThrows(IllegalArgumentException.class,()->cityList.delete(city));
+        assertThrows(IllegalArgumentException.class, () -> cityList.delete(city));
     }
 
     @Test
-    void testCountCities(){
+    void testCountCities() {
         CityList cityList = mockCityList();
         assertEquals(0, mockCity().compareTo(cityList.getCities().get(0)));
         assertEquals(1, cityList.countCities());
