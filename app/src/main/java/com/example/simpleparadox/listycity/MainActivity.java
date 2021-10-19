@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         cityList.setAdapter(cityAdapter);
         cityList.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent = new Intent();
+            Intent intent = new Intent(this, ShowActivity.class);
             intent.putExtra(CITY_EXTRA, dataList.get(i));
             startActivity(intent);
         });
