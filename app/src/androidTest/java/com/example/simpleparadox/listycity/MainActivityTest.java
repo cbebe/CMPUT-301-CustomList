@@ -13,7 +13,10 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.robotium.solo.Solo;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
 /**
  * Test class for MainActivity. All the UI tests are written here. Robotium test framework is
@@ -72,12 +75,12 @@ public class MainActivityTest {
     @Test
     public void checkCiyListItem() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        MainActivity activity = (MainActivity) solo.getCurrentActivity();
         solo.clickOnButton("ADD CITY");
         solo.enterText((EditText) solo.getView(R.id.editText_name), "Edmonton");
         solo.clickOnButton("CONFIRM");
         solo.waitForText("Edmonton", 1, 2000);
         // Get MainActivity to access its variables and methods.
+        MainActivity activity = (MainActivity) solo.getCurrentActivity();
         final ListView cityList = activity.cityList; // Get the listview
         String city = (String) cityList.getItemAtPosition(0); // Get item from first position
         assertEquals("Edmonton", city);
@@ -128,10 +131,11 @@ public class MainActivityTest {
 
     /**
      * Closes the activity after each test
+     *
      * @throws Exception
      */
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         solo.finishOpenedActivities();
     }
 
