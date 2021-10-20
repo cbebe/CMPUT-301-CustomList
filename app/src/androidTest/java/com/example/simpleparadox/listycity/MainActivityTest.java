@@ -61,7 +61,7 @@ public class MainActivityTest {
         /* True if there is a text: Edmonton on the screen, wait at least 2 seconds and find
            minimum one match. */
         assertTrue(solo.waitForText("Edmonton", 1, 2000));
-        solo.clickOnButton("ClEAR ALL"); //Select ClEAR ALL
+        solo.clickOnButton("CLEAR ALL"); //Select CLEAR ALL
         //True if there is no text: Edmonton on the screen
         assertFalse(solo.searchText("Edmonton"));
     }
@@ -72,15 +72,51 @@ public class MainActivityTest {
     @Test
     public void checkCiyListItem() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        MainActivity activity = (MainActivity) solo.getCurrentActivity();
         solo.clickOnButton("ADD CITY");
         solo.enterText((EditText) solo.getView(R.id.editText_name), "Edmonton");
         solo.clickOnButton("CONFIRM");
         solo.waitForText("Edmonton", 1, 2000);
         // Get MainActivity to access its variables and methods.
-        MainActivity activity = (MainActivity) solo.getCurrentActivity();
         final ListView cityList = activity.cityList; // Get the listview
         String city = (String) cityList.getItemAtPosition(0); // Get item from first position
         assertEquals("Edmonton", city);
+    }
+
+    public void moveToShowCity() {
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnButton("CLEAR ALL");
+
+        // add city
+        solo.clickOnButton("ADD CITY");
+        solo.enterText((EditText) solo.getView(R.id.editText_name), "Edmonton");
+        solo.clickOnButton("CONFIRM");
+        solo.waitForText("Edmonton", 1, 2000);
+        solo.clickOnText("Edmonton");
+    }
+
+    @Test
+    public void checkMoveShowActivity() {
+        moveToShowCity();
+        // test for correct activity
+        solo.waitForActivity("ShowActivity", 5000);
+        solo.assertCurrentActivity("Wrong Activity", ShowActivity.class);
+    }
+
+    @Test
+    public void checkCorrectCity() {
+        moveToShowCity();
+        // test for correct city
+        assertTrue(solo.searchText("Edmonton"));
+    }
+
+    @Test
+    public void checkBackButton() {
+        moveToShowCity();
+        // test that back button works
+        solo.clickOnButton("BACK");
+        solo.waitForActivity("MainActivity", 5000);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
     /**
