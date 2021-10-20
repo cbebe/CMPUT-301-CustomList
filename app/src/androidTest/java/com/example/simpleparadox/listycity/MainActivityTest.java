@@ -83,7 +83,7 @@ public class MainActivityTest {
         assertEquals("Edmonton", city);
     }
 
-    public void moveToShowCity() {
+    private void moveToShowCity() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnButton("CLEAR ALL");
 
@@ -95,12 +95,18 @@ public class MainActivityTest {
         solo.clickOnText("Edmonton");
     }
 
+    private void moveToMain() {
+        solo.clickOnButton("BACK");
+        solo.waitForActivity("MainActivity", 5000);
+    }
+
     @Test
     public void checkMoveShowActivity() {
         moveToShowCity();
         // test for correct activity
         solo.waitForActivity("ShowActivity", 5000);
         solo.assertCurrentActivity("Wrong Activity", ShowActivity.class);
+        moveToMain();
     }
 
     @Test
@@ -108,6 +114,7 @@ public class MainActivityTest {
         moveToShowCity();
         // test for correct city
         assertTrue(solo.searchText("Edmonton"));
+        moveToMain();
     }
 
     @Test
