@@ -16,13 +16,30 @@ import java.util.ArrayList;
 
 public class CustomList extends ArrayAdapter<City> {
 
-    private ArrayList<City> cities;
-    private Context context;
+    private final ArrayList<City> cities;
+    private final Context context;
 
-    public CustomList(Context context, ArrayList<City> cities){
-        super(context,0, cities);
+    public CustomList(Context context, ArrayList<City> cities) {
+        super(context, 0, cities);
         this.cities = cities;
         this.context = context;
+    }
+
+    /**
+     * This method will get the size of the list
+     *
+     * @return The size of the list
+     */
+    public int getCount() {
+        return cities.size();
+    }
+
+    /**
+     * This method will add a City object into the list
+     *
+     * @param city City to add to the list
+     */
+    public void addCity(City city) {
     }
 
 
@@ -32,8 +49,8 @@ public class CustomList extends ArrayAdapter<City> {
 //        return super.getView(position, convertView, parent);
         View view = convertView;
 
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.content, parent,false);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.content, parent, false);
         }
 
         City city = cities.get(position);
