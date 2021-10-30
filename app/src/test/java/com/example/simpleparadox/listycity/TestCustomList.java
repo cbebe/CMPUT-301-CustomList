@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class TestCustomList {
     private CustomList list;
+    City city  = new City("Halifax", "NS");
 
     @BeforeEach
     public void createList() {
@@ -18,13 +19,12 @@ public class TestCustomList {
     @Test
     public void addCityTest() {
         int listSize = list.getCount();
-        list.addCity(new City("Halifax", "NS"));
+        list.addCity(city);
         assertEquals(list.getCount(), listSize + 1);
     }
 
     @Test
     public void hasCityTest() {
-        City city  = new City("Halifax", "NS");
         assertFalse(list.hasCity(city));
         list.addCity(city);
         assertTrue(list.hasCity(city));
@@ -32,7 +32,6 @@ public class TestCustomList {
 
     @Test
     public void deleteCityTest() {
-        City city  = new City("Halifax", "NS");
         assertFalse(list.hasCity(city));
         list.addCity(city);
         assertTrue(list.hasCity(city));
@@ -40,5 +39,14 @@ public class TestCustomList {
         list.deleteCity(city);
         assertFalse(list.hasCity(city));
         assertEquals(list.getCount(), listSize - 1);
+    }
+
+    @Test
+    public void countCitiesTest() {
+        assertEquals(list.countCities(), 0);
+        list.addCity(city);
+        assertEquals(list.countCities(), 1);
+        list.deleteCity(city);
+        assertEquals(list.countCities(), 0);
     }
 }
