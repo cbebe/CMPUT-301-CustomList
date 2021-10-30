@@ -40,6 +40,7 @@ public class CustomList extends ArrayAdapter<City> {
      * @param city City to add to the list
      */
     public void addCity(City city) {
+        cities.add(city);
     }
 
 
