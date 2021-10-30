@@ -12,7 +12,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     public static final String CITY_EXTRA = "com.example.simpleparadox.listycity.CITY_EXTRA";
